@@ -1,0 +1,26 @@
+.header-text {
+    padding-top: 80px;
+}
+
+section {
+    background-color: black;
+    padding: 20px;
+    color: azure;
+}
+
+#calculator {
+    padding-top: 30px;
+    width: 500px;
+    margin:0px auto;
+}
+
+#result {
+    display: flex;
+    flex-direction: column;
+}
+
+.control {
+    padding:25px;
+    font-size: 40px;
+    text-align: end;
+}

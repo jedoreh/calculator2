@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>calculator app</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header class="container" id="menu_header"></header>
+
+    <!-- <div id="demo">Welcome</div>
+    <div id="person"></div>
+
+    <button onclick="document.getElementById('pic').src='img/2nd-term-pic.jpg'">Change Picture Back</button>
+   
+    <img id="pic" src="img/2nd-term-pic.jpg" style="width: 40%;" alt="">
+
+    <button onclick="document.getElementById('pic').src='img/download.jfif'">Change Picture</button>
+
+    <button onclick="document.getElementById('pic').style.width='50%'">Change Size</button> -->
+
+
+    <div class="container" id="calculator">
+
+        <section id="result">
+            <label for="result">Result View</label>
+            <input type="text" class="control" id="output_result">
+        </section>
+        <section class="calcbody" id="keyboard">
+            <div>Keyboard</div>
+            <div class="container">
+                <div class="row" id="keys">
+
+                </div>
+                <div class="row" id="operators"></div>
+                <div class="row">
+                    <div class="cols-6">
+                        <button class="btn btn-danger text-center" style="width:30%" id="resultBtn">=</button>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+    </div>
+
+
+    <script>
+
+        let output = document.getElementById("output_result")
+
+        a = 10;
+
+        
+        var b = 4
+        let c = a / b  // + - * / **   %  // += -= *= /= ++ -- == > < >= <= !=
+
+        
+        // output.value = getEvenOrOdd(a)
+
+        function getEvenOrOdd(y){
+            x = y % 2
+            if(x==0){
+                return "Even"
+            } else if(x>0) {
+                return "Odd"
+            }
+        }
+
+        let prime = ""
+        for(let i = 1;i < a; i++){
+            
+            if(i > 1) {
+                y = a % i
+                if(y == 0){
+                    prime = "Not "
+                    break
+                }
+            }
+            // output.value += i
+        }
+        // output.value = a + " is " + prime + "Prime"
+
+
+
+
+        let firstNumber = 0
+        let firstText = ""
+        let secondNumber = 0
+        let secondText = ""
+        let result = 0
+        let start = true
+        let operator = ""
+
+        let keys = document.getElementById("keys")
+        
+
+        for(i=0;i<=9;i++){
+            let btn = document.createElement("button")
+            btn.innerText = i
+            btn.style.width = "30%"
+            btn.classList.add("numberBtn")
+            btn.classList.add("btn")
+            btn.classList.add("btn-primary")
+            btn.style.backgroundColor = "#002233"
+            keys.appendChild(btn)
+
+            btn.addEventListener("click", function(){
+                
+                if(start==true){
+                    if(firstNumber==0){
+                        output.value = ""
+                        firstText = btn.innerText
+
+                    } else if(firstNumber>0){
+                        firstText += btn.innerText
+                    }
+                    firstNumber = parseInt(firstText)
+                    console.log(firstNumber)
+                    
+                } else {
+                    if(secondNumber==0){
+                        secondText = btn.innerText
+                    } else if (secondNumber>0){
+                        secondText += btn.innerText
+                    }
+                    secondNumber = parseInt(secondText)
+                    console.log(secondNumber)
+                }
+                output.value += btn.innerText
+            })
+
+        }
+        
+        arr = [{"operator":"plus", "value":"+", "color":"btn-success"},
+            {"operator":"subtract", "value":"-", "color":"btn-warning"},
+            {"operator":"multiply", "value":"x", "color":"btn-secondary"},
+            {"operator":"divide", "value":"/", "color":"btn-primary"}]
+        
+        // output.value=""
+        for(i=0;i<arr.length;i++){
+            let btn1 = document.createElement("button")
+            btn1.innerText = arr[i].value
+            btn1.style.width = "25%"
+            btn1.classList.add("btn")
+            btn1.classList.add(arr[i].color)
+            document.getElementById("operators").appendChild(btn1)
+
+            btn1.addEventListener("click", function(){
+                output.value += btn1.innerText
+                start = false
+                
+                
+ //||
+                if(firstNumber>0 && secondNumber>0){
+                    let outputResult = 0
+                    if(operator=="+"){
+                        outputResult = firstNumber + secondNumber
+                        
+                    } else if(operator=="-"){
+                        outputResult = firstNumber - secondNumber
+                    } else if(operator=="x"){
+                        outputResult = firstNumber * secondNumber
+                    } else if(operator=="/"){
+                        outputResult = firstNumber / secondNumber
+                    }
+                    console.log(outputResult,operator)
+                    firstNumber = outputResult
+                    secondNumber = 0
+                   
+                    
+                }
+                operator = btn1.innerText
+                console.log(firstNumber,secondNumber,operator)
+            })
+        }
+
+        let resultBtn = document.getElementById("resultBtn")
+        console.log(resultBtn)
+        resultBtn.addEventListener("click", function(){
+            console.log(operator)
+            let outputResult = 0
+            if(operator=="+"){
+                outputResult = firstNumber + secondNumber
+            } else if(operator=="-"){
+                outputResult = firstNumber - secondNumber
+            } else if(operator=="x"){
+                outputResult = firstNumber * secondNumber
+            } else if(operator=="/"){
+                outputResult = firstNumber / secondNumber
+            }
+            output.value += "=" + outputResult
+            start = true
+            firstNumber = 0
+            secondNumber = 0
+        })
+
+
+
+        let numberButton = document.getElementsByClassName("numberBtn")
+        // numberButton.addEventListener("click", function(){
+        //     console.log("Clicked")
+        // })
+
+        
+
+        //This is a program to calculate simple arithmetic
+        //Designed by Jotham on 17/3/2023
+
+        // var student = "Mary"
+        // let person = "Alex"
+        // const school = "Uniben"
+
+        //Data Types
+        /*
+            DATA TYPES
+            THIS IS A COMMENT
+            THAT SPANS MULTIPLE LINES
+            1. STRINGS - names, address, phone numbers
+            2. NUMBERS - age, scores (integers, floats)
+            3. BOOLEANS - True or False
+            4. OBJECTS
+            5. NULL
+            6. ARRAYS
+        */
+
+        // console.log(student)
+        // window.alert(person)
+        // document.write(school)
+
+
+//         let demo = document.getElementById("demo")
+//         console.log(demo)
+//         demo.innerText = "Welcome to Javascript"
+// 
+//         document.getElementById("person").innerHTML = "<h2>" + student + "</h2>"
+
+
+    </script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/menu.js"></script>
+</body>
+</html>
